@@ -1,12 +1,12 @@
-// src/components/UploadPDF.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { BASE_URL } from './config'; // Ajusta ruta si necesario
+import { BASE_URL } from './config';
 
 export default function UploadPDF({ parcial, categoria, categorias }) {
   const [archivo, setArchivo] = useState(null);
   const [cat, setCat] = useState(categoria);
   const [parc, setParc] = useState(parcial);
+  const [calificacion, setCalificacion] = useState(1); // ⭐️ NUEVO
   const [mensaje, setMensaje] = useState('');
   const [cargando, setCargando] = useState(false);
 
@@ -25,6 +25,7 @@ export default function UploadPDF({ parcial, categoria, categorias }) {
       formData.append('pdf', archivo);
       formData.append('categoria', cat);
       formData.append('parcial', parc);
+      formData.append('calificacion', calificacion); // ⭐️ NUEVO
 
       const res = await axios.post(`${BASE_URL}/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -32,7 +33,6 @@ export default function UploadPDF({ parcial, categoria, categorias }) {
 
       setMensaje('Archivo subido correctamente.');
       setArchivo(null);
-      // Opcional: aquí podrías emitir un evento para actualizar la lista
     } catch (error) {
       console.error('Error subiendo archivo:', error);
       setMensaje('Error al subir el archivo.');
@@ -63,14 +63,12 @@ export default function UploadPDF({ parcial, categoria, categorias }) {
           className="w-full border border-gray-300 rounded px-2 py-1"
         >
           {categorias.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
+            <option key={c} value={c}>{c}</option>
           ))}
         </select>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-3">
         <label className="block mb-1 font-medium">Parcial:</label>
         <select
           value={parc}
@@ -79,6 +77,19 @@ export default function UploadPDF({ parcial, categoria, categorias }) {
         >
           <option>Primer Parcial</option>
           <option>Segundo Parcial</option>
+        </select>
+      </div>
+
+      <div className="mb-3">
+        <label className="block mb-1 font-medium">Calificación:</label>
+        <select
+          value={calificacion}
+          onChange={(e) => setCalificacion(parseInt(e.target.value))}
+          className="w-full border border-gray-300 rounded px-2 py-1"
+        >
+          {[0,1, 2, 3, 4, 5,6,7,8,9,10].map((valor) => (
+            <option key={valor} value={valor}>{valor}</option>
+          ))}
         </select>
       </div>
 

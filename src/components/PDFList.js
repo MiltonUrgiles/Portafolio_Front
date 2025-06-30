@@ -20,7 +20,7 @@ export default function PDFList({ parcial, categoria }) {
 
   useEffect(() => {
     setErrorCarga(null);
-    
+
     const url = `${BASE_URL}?parcial=${encodeURIComponent(parcial)}&categoria=${encodeURIComponent(categoria)}`;
     console.log("Consultando:", url);
 
@@ -68,16 +68,20 @@ export default function PDFList({ parcial, categoria }) {
                 {pdf.Nombre}
               </div>
 
+              {/* Calificación */}
+              {pdf.Calificacion != null && (
+                <div className="pdf-rating">
+                  Calificación: {pdf.Calificacion} ⭐
+                </div>
+              )}
+
               <div className="pdf-buttons">
                 <button onClick={() => verPDF(pdf.Id)} className="btn-ver">
                   Ver
                 </button>
-
-                {/* Eliminar desactivado por ahora */}
                 <button onClick={() => eliminarPDF(pdf.Id)} className="btn-eliminar">
                   Eliminar
                 </button>
-
               </div>
             </div>
           ))}
