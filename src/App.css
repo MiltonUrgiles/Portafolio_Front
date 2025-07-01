@@ -1,64 +1,89 @@
-/* App.css - Estilos para toda la app */
+:root {
+  --vino: #7b1f27;
+  --vino-claro: #f8e9ea;
+  --vino-medio: #8b1e3f;
+  --texto: #1f2937;
+  --fondo-claro: #f5f7fa;
+}
 
 /* Reset básico y fuente */
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f7fa; /* Gris muy claro */
-  color: #1f2937; /* Gris oscuro para texto */
+  background-color: var(--fondo-claro);
+  color: var(--texto);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 /* Contenedor principal */
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem ;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* HEADER */
+/* HEADER PRINCIPAL */
+
 header {
-  background-color: #5b21b6; /* Morado fuerte */
-  color: #ede9fe;           /* Morado muy claro */
-  padding: 1rem 2rem;
-  box-shadow: 0 4px 10px rgba(91,33,182,0.3);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  background-color: var(--vino);
+  color: var(--vino-claro);
+  padding: 13rem 2rem 0rem 2rem;
+  box-shadow: 0 4px 10px rgba(123, 31, 39, 0.3);
   font-weight: 600;
   user-select: none;
+  position: relative; /* Necesario para que el hijo absolute se posicione respecto a este */
+  overflow: hidden;   /* Opcional, si no quieres que la imagen se salga del header */
 }
 
 header h1 {
   font-size: 1.75rem;
   white-space: nowrap;
+  margin: 0;
 }
 
-/* Contenedor nav flex horizontal */
-nav {
+/* IMAGEN DE ENCABEZADO (ENTRE HEADER Y MENÚ) */
+.imagen-encabezado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 98vw;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+}
+
+
+/* SUBHEADER - MENÚS */
+.subheader {
+  background-color: var(--vino);
+  color: var(--vino-claro);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 2rem 2rem 2rem;
+  box-shadow: 0 4px 10px rgba(123, 31, 39, 0.15);
+  font-weight: 600;
+  z-index: 1000;
+}
+
+.subheader nav {
   display: flex;
   gap: 2rem;
 }
 
-/* Cada menú padre */
-nav > div {
+.subheader nav > div {
   position: relative;
 }
 
-/* Botón principal del menú */
-nav > div > button {
+.subheader nav > div > button {
   background: transparent;
   border: none;
-  color: #ede9fe;
+  color: var(--vino-claro);
   font-weight: 600;
   padding: 0.4rem 1rem;
   border-radius: 8px;
@@ -67,22 +92,21 @@ nav > div > button {
   transition: background-color 0.3s ease;
 }
 
-nav > div > button:hover,
-nav > div > button:focus {
+.subheader nav > div > button:hover,
+.subheader nav > div > button:focus {
   background-color: rgba(255,255,255,0.25);
   outline: none;
 }
 
-/* Dropdown menú */
 .dropdown-menu {
   display: none;
   position: absolute;
   top: 3.3rem;
   left: 0;
-  background: #ede9fe;
-  color: #5b21b6;
+  background: var(--vino-claro);
+  color: var(--vino);
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(91,33,182,0.25);
+  box-shadow: 0 4px 15px rgba(123, 31, 39, 0.25);
   min-width: 180px;
   max-height: 260px;
   overflow-y: auto;
@@ -90,13 +114,11 @@ nav > div > button:focus {
   user-select: none;
 }
 
-/* Mostrar dropdown al hover o foco */
-nav > div:hover .dropdown-menu,
-nav > div:focus-within .dropdown-menu {
+.subheader nav > div:hover .dropdown-menu,
+.subheader nav > div:focus-within .dropdown-menu {
   display: block;
 }
 
-/* Opciones dropdown */
 .dropdown-menu div {
   padding: 0.6rem 1.2rem;
   font-weight: 600;
@@ -107,21 +129,20 @@ nav > div:focus-within .dropdown-menu {
 
 .dropdown-menu div:hover,
 .dropdown-menu div:focus {
-  background-color: #d8b4fe;
+  background-color: #f0d0d3;
 }
 
-/* Scroll estilos */
 .dropdown-menu::-webkit-scrollbar {
   width: 6px;
 }
 
 .dropdown-menu::-webkit-scrollbar-thumb {
-  background-color: #7c3aed;
+  background-color: var(--vino);
   border-radius: 4px;
 }
 
 .dropdown-menu::-webkit-scrollbar-track {
-  background-color: #ede9fe;
+  background-color: var(--vino-claro);
 }
 
 /* MAIN */
@@ -145,7 +166,7 @@ form {
   background: #fafafa;
   padding: 1.8rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(91,33,182,0.1);
+  box-shadow: 0 8px 20px rgba(123, 31, 39, 0.1);
   max-width: 500px;
   margin: 0 auto;
   display: flex;
@@ -154,7 +175,7 @@ form {
 }
 
 form h3 {
-  color: #5b21b6;
+  color: var(--vino);
   font-weight: 700;
   margin-bottom: 1rem;
   font-size: 1.3rem;
@@ -163,16 +184,17 @@ form h3 {
 
 form label {
   font-weight: 600;
-  color: #374151; /* gris oscuro */
+  color: #374151;
   font-size: 1rem;
 }
 
 form input[type="file"],
-form select {
+form select,
+form input[type="number"] {
   width: 100%;
   padding: 0.6rem 1rem;
   font-size: 1rem;
-  border: 1.5px solid #c4b5fd; /* morado claro */
+  border: 1.5px solid #cfa5a8;
   border-radius: 8px;
   background-color: white;
   outline-offset: 2px;
@@ -181,20 +203,22 @@ form select {
 }
 
 form input[type="file"]:hover,
-form select:hover {
-  border-color: #7c3aed; /* morado medio */
+form select:hover,
+form input[type="number"]:hover {
+  border-color: var(--vino-medio);
 }
 
 form input[type="file"]:focus,
-form select:focus {
-  border-color: #6d28d9;
-  box-shadow: 0 0 8px #a78bfa88;
+form select:focus,
+form input[type="number"]:focus {
+  border-color: var(--vino);
+  box-shadow: 0 0 8px #dba2a588;
 }
 
 form button {
   margin-top: 1.4rem;
   width: 100%;
-  background-color: #6d28d9;
+  background-color: var(--vino);
   color: white;
   font-weight: 700;
   padding: 0.75rem 0;
@@ -206,20 +230,19 @@ form button {
 }
 
 form button:hover {
-  background-color: #581c87;
+  background-color: var(--vino-medio);
 }
 
 form button:disabled {
-  background-color: #b497f6;
+  background-color: #ddb8bb;
   cursor: not-allowed;
 }
 
-/* Mensajes de estado */
 .mensaje {
   text-align: center;
   font-weight: 600;
   margin-top: 1rem;
-  color: #4b5563; /* gris medio */
+  color: #4b5563;
 }
 
 /* PDF LIST */
@@ -235,7 +258,7 @@ form button:disabled {
 .pdf-list-title {
   font-weight: 800;
   font-size: 1.8rem;
-  color: #5b21b6;
+  color: var(--vino);
   text-align: center;
   margin-bottom: 1.8rem;
 }
@@ -247,10 +270,10 @@ form button:disabled {
 }
 
 .pdf-item {
-  background: #f9f7ff;
+  background: #fdf4f5;
   border-radius: 12px;
   padding: 1rem 1.3rem;
-  box-shadow: 0 6px 15px rgba(91,33,182,0.12);
+  box-shadow: 0 6px 15px rgba(123, 31, 39, 0.12);
   height: 140px;
   display: flex;
   flex-direction: column;
@@ -263,13 +286,13 @@ form button:disabled {
 
 .pdf-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(91,33,182,0.25);
+  box-shadow: 0 10px 25px rgba(123, 31, 39, 0.25);
 }
 
 .pdf-name {
   font-weight: 700;
   font-size: 1.05rem;
-  color: #312e81;
+  color: #6b0f1a;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -299,11 +322,11 @@ form button:disabled {
 }
 
 .btn-ver {
-  background-color: #7c3aed;
+  background-color: var(--vino);
 }
 
 .btn-ver:hover {
-  background-color: #5b21b6;
+  background-color: var(--vino-medio);
 }
 
 .btn-eliminar {
@@ -319,20 +342,21 @@ form button:disabled {
   cursor: not-allowed;
 }
 
+.pdf-rating {
+  font-size: 0.9em;
+  color: #f59e0b;
+  margin-top: 4px;
+}
+
 /* FOOTER */
 footer {
-  background-color: #5b21b6;
-  color: #ede9fe;
+  background-color: var(--vino);
+  color: var(--vino-claro);
   text-align: center;
   padding: 1rem 2rem;
   font-weight: 600;
-  box-shadow: 0 -4px 8px rgba(91,33,182,0.3);
+  box-shadow: 0 -4px 8px rgba(123, 31, 39, 0.3);
   user-select: none;
   font-size: 0.9rem;
   margin-top: auto;
-}
-.pdf-rating {
-  font-size: 0.9em;
-  color: #f59e0b; 
-  margin-top: 4px;
 }

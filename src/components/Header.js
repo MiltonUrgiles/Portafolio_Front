@@ -1,42 +1,35 @@
-// src/components/Header.js
 import React from 'react';
+import headerImage from '../assets/hed.png'; // tu imagen
 
 export default function Header({ categorias, parciales, parcial, setParcial, categoria, setCategoria }) {
   return (
-    <header>
-      <div className="container">
+    <>
+  <img src={headerImage} alt="Encabezado" className="imagen-encabezado" />
+      
+ <header>
         <h1>Matemáticas - Portafolio Digital</h1>
-
+      </header>
+      <div className="subheader">
         <nav>
-          {/* Parcial dropdown */}
           <div tabIndex={0}>
-            <button>
-              Parcial: {parcial} ▼
-            </button>
+            <button>Parcial: {parcial} ▼</button>
             <div className="dropdown-menu">
               {parciales.map((p) => (
-                <div key={p} onClick={() => setParcial(p)} tabIndex={0}>
-                  {p}
-                </div>
+                <div key={p} onClick={() => setParcial(p)}>{p}</div>
               ))}
             </div>
           </div>
 
-          {/* Categoría dropdown */}
           <div tabIndex={0}>
-            <button>
-              Categoría: {categoria} ▼
-            </button>
+            <button>Categoría: {categoria} ▼</button>
             <div className="dropdown-menu">
               {categorias.map((cat) => (
-                <div key={cat} onClick={() => setCategoria(cat)} tabIndex={0}>
-                  {cat}
-                </div>
+                <div key={cat} onClick={() => setCategoria(cat)}>{cat}</div>
               ))}
             </div>
           </div>
         </nav>
       </div>
-    </header>
+    </>
   );
 }
